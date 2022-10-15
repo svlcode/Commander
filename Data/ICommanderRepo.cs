@@ -4,7 +4,10 @@ namespace Commander.Data
 {
     public interface ICommanderRepo
     {
-        IEnumerable<Command> GetAppCommands();
-        Command GetCommandById(int id);
+        Task<IEnumerable<Command>> GetAllCommandsAsync();
+        Task<Command> GetCommandByIdAsync(int id);
+        void CreateCommand(Command cmd);
+        Task<bool> SaveChangesAsync();
+        void Delete(Command cmd);
     }
 }

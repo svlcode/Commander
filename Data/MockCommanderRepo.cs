@@ -2,9 +2,14 @@ using Commander.Models;
 
 namespace Commander.Data
 {
-    public class MockCommanderRepo : ICommanderRepo
+    public class MockCommanderRepo
     {
-        public IEnumerable<Command> GetAppCommands()
+        public void CreateCommand(Command cmd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Command>> GetAllCommands()
         {
             var commands = new List<Command>
             {
@@ -24,18 +29,23 @@ namespace Commander.Data
               }
             };
 
-            return commands;
+            return Task.FromResult(commands.AsEnumerable());
         }
 
-        public Command GetCommandById(int id)
+        public Task<Command> GetCommandById(int id)
         {
-            return new Command
+            return Task.FromResult(new Command
             {
                 Id = id,
                 HowTo = "Test stuff",
                 Line = "command here",
                 Platform = "Android"
-            };
+            });
+        }
+
+        public Task<bool> SaveChanges()
+        {
+            throw new NotImplementedException();
         }
     }
 }
